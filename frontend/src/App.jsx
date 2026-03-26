@@ -9,8 +9,10 @@ export default function App(){
   const [checkoutData,setCheckoutData] = useState(null);
   const UPI_VPA = (import.meta.env.VITE_UPI_VPA) || 'tsm@upi';
 
+  const API_BASE = import.meta.env.VITE_API_URL || '';
+
   useEffect(()=>{
-    axios.get('/api/products').then(r=>setProducts(r.data));
+    axios.get(`${API_BASE}/api/products`).then(r=>setProducts(r.data));
   },[]);
 
   function addToCart(p){
@@ -26,7 +28,7 @@ export default function App(){
     const total = subtotal;
     const items = cart;
     const payload = {...customer, items, subtotal, total};
-    const res = await axios.post('/api/orders', payload);
+    const res = await axios.post(`${API_BASE}/api/orders`, payload);
     if(res.data.ok) {
       setCheckoutData({ ok:true, id: res.data.id, upi:`upi://pay?pa=${UPI_VPA}&pn=tsm+crackers&am=${total}&cu=INR` });
       setCart([]);
