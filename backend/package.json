@@ -6,6 +6,9 @@
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "better-sqlite3": "^8.1.0",
     "cors": "^2.8.5",
